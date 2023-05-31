@@ -1,38 +1,51 @@
-#include <xc.h>
-#include<pic18f4550.h>
-#include<stdlib.h>
-#include <stdio.h>
+/*
+ * File:   timercounter.c
+ * Author: ADITYA
+ *
+ * Created on 31 May, 2023, 3:24 PM
+ */
 
-void main()
+
+#include <xc.h>
+#include <pic18f4550.h>
+#include <stdlib.h>
+
+void delay()
 {
+    int i,j;
+    
+    for(i=0;i<200;i++)
+    {
+        for(j=0;j<500;j++)
+        {
+            
+        }
+    }
+}
+
+void main(void)
+{
+    TRISB=0x00;
     TRISD=0x00;
     T0CON=0x48;
     TMR0L=0x00;
-   
+    
+    int count;
+    
     while(1)
-	{
-         T0CONbits.TMR0ON=1;
-    		do
-		{
-       		 /PORTD=TMR0L;/
-       		 for(int i=0;i<500 ;i++)
-				{
-					for(int j=0;j<100;j++){ }
-				}
-    		}
-   		while(INTCONbits.TMR0IF==0);
+    {
+        TMR0ON=1;
+        delay();
+        while(TMR0IF==0);
         
-         	PORTD=0xFF;
-           for(int i=0;i<100 ;i++)
-		{
-			for(int j=0;j<100;j++){}
-		}
-          T0CONbits.TMR0ON=0;
-          INTCONbits.TMR0IF=0;
-          if(T0CONbits.TMR0ON==0)
-		{
-              PORTD=0x00;
-		}
+        PORTD=0xFF;
+        count++;
+        delay();
+        
+        TMR0ON=0;
+        TMR0IF=0;
+        
+        PORTD=0x00;
+        PORTB=count;
     }
-    return;
 }
