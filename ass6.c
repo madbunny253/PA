@@ -21,3 +21,35 @@ PORTD=0xAA;
 todelay();
 }
 }
+
+
+#include<pic18f4550.h>
+#include<xc.h>
+
+void delay()
+{
+    int i,j;
+    
+    for(i=0;i<200;i++)
+    {
+        for(j=0;j<500;j++)
+        {
+            
+        }
+    }
+}
+
+void main(void)
+{
+    TRISD=0x00;
+    
+    while(1)
+    {
+        PORTD=0x55;
+        delay();
+        PORTD=0x99;
+        delay();
+    }
+    
+    return;
+}
