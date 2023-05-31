@@ -53,3 +53,44 @@ void main(void)
     
     while(1);
 }
+
+#include <xc.h>
+#include <pic18f4550.h>
+#define buzzer LATAbits.LATA5
+
+int count;
+void timer1ISR()
+{
+    if(TMR1IF==1)
+    {
+        TMR1L=0x20;
+        TMR1H=0xD1;
+        count++
+        if(count>1000)
+        {
+            buzzer=~buzzer;
+            count=0;
+        }
+        
+        
+        
+        TMR1IF=0;
+    }
+}
+
+void main(void) 
+{
+    TRISAbits.TRISA5=0;
+    T1CON=0x80;
+    
+    GIE=1; 
+    PEIE=1;
+    TMR1IE=1;
+    TMR1IF=0;
+    
+    TMR1L=0x20;
+    TMR1H=0xD1;
+    TMR1ON=1;
+    
+    while(1);
+}
