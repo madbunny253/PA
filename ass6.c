@@ -47,7 +47,7 @@ void main(void)
     {
         PORTD=0x55;
         delay();
-        PORTD=0x99;
+        PORTD=0xAA;
         delay();
     }
     
